@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Home() {
   return (
     <main
@@ -15,13 +17,20 @@ export default function Home() {
           "system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
       }}
     >
+      <Image
+        src="/m-Logo.png"
+        alt="m0saic logo"
+        width={250}
+        height={120}
+        style={{ marginBottom: "1.5rem" }}
+      />
+
       <h1
         style={{
           fontSize: "3rem",
           fontWeight: 700,
           letterSpacing: "0.02em",
           marginBottom: "0.75rem",
-          textTransform: "none",
         }}
       >
         m0saic
@@ -59,7 +68,7 @@ export default function Home() {
           opacity: 0.45,
         }}
       >
-        v1 coming soon · Created by TSK · Made in NYC
+        v1 coming soon · Made with ❤️ in NYC
       </p>
     </main>
   );
