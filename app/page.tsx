@@ -286,17 +286,29 @@ function generateFrames(seed: number, offsetY: number, windowWidth: number): Fra
   const innerWidth = 1000 - marginX * 2;
   const innerHeight = BAND_HEIGHT - marginY * 2;
 
-// responsive column count
-  let cols = 6;
-  if (windowWidth >= 1600) cols = 11;
-  else if (windowWidth >= 1300) cols = 9;
-  else if (windowWidth >= 1000) cols = 8;
-  else if (windowWidth >= 800) cols = 7;
-  else cols = 5;
+    // 🔹 Responsive column count – *more* columns on smaller screens
+  let cols: number;
+    let rows = 5;
 
-  const rows = 5;
+  if (windowWidth <= 480) {
+    // small phones – skinny cards
+    cols = 11;
+  } else if (windowWidth <= 768) {
+    // large phones / small tablets
+    cols = 9;
+  } else if (windowWidth <= 1200) {
+    // laptops
+    cols = 8;
+  } else if (windowWidth <= 1600) {
+    // big desktops
+    cols = 9;
+  } else {
+    // ultra-wide
+    cols = 9;
+    rows = 6;
+  }
 
-  const gapX = 16;            // was 20 – slightly tighter
+   const gapX = windowWidth <= 768 ? 12 : 16;         // was 20 – slightly tighter
   const gapY = 24;
 
   const cellW = (innerWidth - gapX * (cols - 1)) / cols;
