@@ -314,9 +314,21 @@ function generateFrames(seed: number, offsetY: number, windowWidth: number): Fra
   const cellW = (innerWidth - gapX * (cols - 1)) / cols;
   const cellH = (innerHeight - gapY * (rows - 1)) / rows;
 
+    // 🔹 Responsive skipChance instead of hard-coded 0.04
+  let skipChance: number;
+  if (windowWidth <= 600) {
+    skipChance = 0.04;    // dense on phones
+  } else if (windowWidth <= 1200) {
+    skipChance = 0.06;    // tablets / small laptops
+  } else if (windowWidth <= 1600) {
+    skipChance = 0.08;    // normal desktops
+  } else {
+    skipChance = 0.10;    // big/ultra-wide
+  }
+
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
-      if (rng() < 0.04) continue; // small skip rate for organic feel
+      if (rng() < skipChance) continue; // small skip rate for organic feel
 
       const x = marginX + col * (cellW + gapX);
       const y = marginY + row * (cellH + gapY);
