@@ -27,9 +27,6 @@ function SpecLinkGate() {
 }
 
 export default function Home() {
-  const searchParams = useSearchParams();
-const showSpecLink = searchParams.get("spec") === "1";
-
   return (
     <main
       style={{
