@@ -2,7 +2,29 @@
 
 import { SkeletonBackground } from "../components/SkeletonBackground/SkeletonBackground";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
+function SpecLinkGate() {
+  const searchParams = useSearchParams();
+  const showSpecLink = searchParams.get("spec") === "1";
+
+  if (!showSpecLink) return null;
+
+  return (
+    <a
+      href="/spec"
+      style={{
+        marginTop: "1.5rem",
+        fontSize: "0.85rem",
+        opacity: 0.55,
+        color: "inherit",
+        textDecoration: "none",
+      }}
+    >
+      View technical specification →
+    </a>
+  );
+}
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -125,22 +147,9 @@ const showSpecLink = searchParams.get("spec") === "1";
           >
             v1 coming soon · Made with ❤️ in NYC
           </p>
-
-          {showSpecLink && (
-  <a
-    href="/spec"
-    style={{
-      marginTop: "1.5rem",
-      fontSize: "0.85rem",
-      opacity: 0.55,
-      color: "inherit",
-      textDecoration: "none",
-    }}
-  >
-    View technical specification →
-  </a>
-)}
-
+<Suspense fallback={null}>
+  <SpecLinkGate />
+</Suspense>
         </div>
       </section>
     </main>
